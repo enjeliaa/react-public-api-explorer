@@ -55,10 +55,10 @@ export default function HomePage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-3 gap-3 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-          <Stat label="Products" value={products.length} />
+        <div className="grid grid-cols-1 gap-3 rounded-lg border border-slate-200 bg-white p-4 shadow-sm sm:grid-cols-3">
+          <Stat label="Items" value={products.length} />
           <Stat label="Categories" value={STORE_CATEGORIES.length} />
-          <Stat label="Updated" value="Live" />
+          <Stat label="Drop" value="New" />
         </div>
       </section>
 

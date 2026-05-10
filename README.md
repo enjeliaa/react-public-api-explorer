@@ -41,6 +41,7 @@ Website React sederhana untuk katalog clothing store pribadi. Project ini tetap 
 - Menampilkan katalog produk clothing store.
 - Halaman detail produk berdasarkan ID.
 - Search dan filter kategori: Men's Clothing, Women's Clothing, Children's Clothing, dan Baby Clothing.
+- Kartu produk dibuat rata dengan ukuran gambar yang konsisten.
 - Loading state saat fetch data.
 - Error handling saat request gagal.
 - Responsive layout menggunakan Tailwind CSS.

@@ -51,8 +51,8 @@ export default function ProductDetailPage() {
 
       {!loading && !error && product ? (
         <section className="grid gap-8 rounded-lg border border-slate-200 bg-white p-5 shadow-sm lg:grid-cols-[0.9fr_1.1fr] lg:p-8">
-          <div className="flex min-h-80 items-center justify-center rounded-lg bg-slate-50 p-8">
-            <img src={product.image} alt={product.title} className="max-h-96 w-full object-contain" />
+          <div className="flex h-[28rem] items-center justify-center rounded-lg bg-slate-50 p-8">
+            <img src={product.image} alt={product.title} className="h-full w-full object-contain" />
           </div>
 
           <div className="flex flex-col justify-center">
