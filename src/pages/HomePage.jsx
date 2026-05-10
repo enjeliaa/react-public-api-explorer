@@ -4,6 +4,7 @@ import ErrorState from '../components/ErrorState.jsx';
 import LoadingState from '../components/LoadingState.jsx';
 import ProductGrid from '../components/ProductGrid.jsx';
 import { getProducts } from '../api/products.js';
+import { STORE_CATEGORIES, buildStoreProducts } from '../data/storeCatalog.js';
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
@@ -17,7 +18,7 @@ export default function HomePage() {
       setLoading(true);
       setError('');
       const data = await getProducts();
-      setProducts(data);
+      setProducts(buildStoreProducts(data));
     } catch (err) {
       setError(err.message || 'Terjadi kesalahan saat mengambil data produk.');
     } finally {
@@ -28,11 +29,6 @@ export default function HomePage() {
   useEffect(() => {
     fetchProducts();
   }, []);
-
-  const categories = useMemo(
-    () => ['all', ...new Set(products.map((product) => product.category))],
-    [products],
-  );
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
@@ -48,21 +44,21 @@ export default function HomePage() {
       <section className="mb-8 grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-emerald-700">
-            Public API Explorer
+            Rivelle Store
           </p>
           <h1 className="mt-3 max-w-3xl text-4xl font-bold leading-tight sm:text-5xl">
-            Temukan produk dari Fake Store API.
+            Curated everyday wear for your next rotation.
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
-            Data produk diambil langsung dari endpoint public API menggunakan useEffect, lengkap
-            dengan loading state, error handling, filter, dan halaman detail.
+            Koleksi pakaian pilihan dengan tampilan clean, nyaman dipakai, dan mudah dipadukan
+            untuk outfit harian.
           </p>
         </div>
 
         <div className="grid grid-cols-3 gap-3 rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
           <Stat label="Products" value={products.length} />
-          <Stat label="Categories" value={Math.max(categories.length - 1, 0)} />
-          <Stat label="Source" value="API" />
+          <Stat label="Categories" value={STORE_CATEGORIES.length} />
+          <Stat label="Updated" value="Live" />
         </div>
       </section>
 
@@ -89,7 +85,7 @@ export default function HomePage() {
             onChange={(event) => setCategory(event.target.value)}
             className="h-11 w-full rounded-md border border-slate-200 bg-slate-50 px-3 text-sm capitalize outline-none transition focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-100"
           >
-            {categories.map((item) => (
+            {['all', ...STORE_CATEGORIES].map((item) => (
               <option key={item} value={item}>
                 {item === 'all' ? 'Semua kategori' : item}
               </option>

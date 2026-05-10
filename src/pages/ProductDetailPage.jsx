@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, Star } from 'lucide-react';
 import ErrorState from '../components/ErrorState.jsx';
-import { getProductById } from '../api/products.js';
+import { getProducts } from '../api/products.js';
+import { buildStoreProducts } from '../data/storeCatalog.js';
 import { formatCurrency } from '../utils/formatCurrency.js';
 
 export default function ProductDetailPage() {
@@ -15,8 +16,14 @@ export default function ProductDetailPage() {
     try {
       setLoading(true);
       setError('');
-      const data = await getProductById(productId);
-      setProduct(data);
+      const data = await getProducts();
+      const selectedProduct = buildStoreProducts(data).find((item) => item.id === productId);
+
+      if (!selectedProduct) {
+        throw new Error('Produk tidak ditemukan.');
+      }
+
+      setProduct(selectedProduct);
     } catch (err) {
       setError(err.message || 'Terjadi kesalahan saat mengambil detail produk.');
     } finally {

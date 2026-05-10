@@ -10,7 +10,7 @@ export default function Layout() {
             <span className="flex h-10 w-10 items-center justify-center rounded-md bg-emerald-600 text-white">
               <ShoppingBag size={20} aria-hidden="true" />
             </span>
-            <span>API Product Explorer</span>
+            <span>Rivelle Store</span>
           </Link>
 
           <NavLink
@@ -23,7 +23,7 @@ export default function Layout() {
               }`
             }
           >
-            Products
+            Shop
           </NavLink>
         </nav>
       </header>

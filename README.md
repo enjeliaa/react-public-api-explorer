@@ -1,6 +1,6 @@
-# Public API Explorer
+# Rivelle Store
 
-Website React sederhana untuk mengeksplorasi produk dari Fake Store API. Project ini dibuat untuk tugas Midterm Frontend Development GDGoC: Side Effects & Data Fetching dengan `useEffect`.
+Website React sederhana untuk katalog clothing store pribadi. Project ini tetap menggunakan Fake Store API sebagai sumber data remote untuk memenuhi tugas Midterm Frontend Development GDGoC: Side Effects & Data Fetching dengan `useEffect`.
 
 ## Tech Stack
 
@@ -38,9 +38,9 @@ Website React sederhana untuk mengeksplorasi produk dari Fake Store API. Project
 
 ## Fitur
 
-- Menampilkan daftar produk dari Public API.
+- Menampilkan katalog produk clothing store.
 - Halaman detail produk berdasarkan ID.
-- Search dan filter kategori.
+- Search dan filter kategori: Men's Clothing, Women's Clothing, Children's Clothing, dan Baby Clothing.
 - Loading state saat fetch data.
 - Error handling saat request gagal.
 - Responsive layout menggunakan Tailwind CSS.
