@@ -1,43 +1,22 @@
-import { useEffect, useMemo, useState } from 'react';
 import { Search } from 'lucide-react';
 import ErrorState from '../components/ErrorState.jsx';
 import LoadingState from '../components/LoadingState.jsx';
 import ProductGrid from '../components/ProductGrid.jsx';
-import { getProducts } from '../api/products.js';
-import { STORE_CATEGORIES, buildStoreProducts } from '../data/storeCatalog.js';
+import { STORE_CATEGORIES } from '../data/storeCatalog.js';
+import { useProducts } from '../hooks/useProducts.js';
 
 export default function HomePage() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [query, setQuery] = useState('');
-  const [category, setCategory] = useState('all');
-
-  async function fetchProducts() {
-    try {
-      setLoading(true);
-      setError('');
-      const data = await getProducts();
-      setProducts(buildStoreProducts(data));
-    } catch (err) {
-      setError(err.message || 'Terjadi kesalahan saat mengambil data produk.');
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
-      const matchesQuery = product.title.toLowerCase().includes(query.toLowerCase());
-      const matchesCategory = category === 'all' || product.category === category;
-
-      return matchesQuery && matchesCategory;
-    });
-  }, [products, query, category]);
+  const {
+    products,
+    filteredProducts,
+    loading,
+    error,
+    query,
+    setQuery,
+    category,
+    setCategory,
+    refetchProducts,
+  } = useProducts();
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
@@ -95,7 +74,7 @@ export default function HomePage() {
       </section>
 
       {loading ? <LoadingState /> : null}
-      {!loading && error ? <ErrorState message={error} onRetry={fetchProducts} /> : null}
+      {!loading && error ? <ErrorState message={error} onRetry={refetchProducts} /> : null}
       {!loading && !error ? <ProductGrid products={filteredProducts} /> : null}
     </div>
   );

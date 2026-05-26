@@ -1,39 +1,12 @@
-import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, Star } from 'lucide-react';
 import ErrorState from '../components/ErrorState.jsx';
-import { getProducts } from '../api/products.js';
-import { buildStoreProducts } from '../data/storeCatalog.js';
+import { useProductDetail } from '../hooks/useProductDetail.js';
 import { formatCurrency } from '../utils/formatCurrency.js';
 
 export default function ProductDetailPage() {
   const { productId } = useParams();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  async function fetchProductDetail() {
-    try {
-      setLoading(true);
-      setError('');
-      const data = await getProducts();
-      const selectedProduct = buildStoreProducts(data).find((item) => item.id === productId);
-
-      if (!selectedProduct) {
-        throw new Error('Produk tidak ditemukan.');
-      }
-
-      setProduct(selectedProduct);
-    } catch (err) {
-      setError(err.message || 'Terjadi kesalahan saat mengambil detail produk.');
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    fetchProductDetail();
-  }, [productId]);
+  const { product, loading, error, refetchProductDetail } = useProductDetail(productId);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
@@ -47,7 +20,7 @@ export default function ProductDetailPage() {
 
       {loading ? <ProductDetailSkeleton /> : null}
 
-      {!loading && error ? <ErrorState message={error} onRetry={fetchProductDetail} /> : null}
+      {!loading && error ? <ErrorState message={error} onRetry={refetchProductDetail} /> : null}
 
       {!loading && !error && product ? (
         <section className="grid gap-8 rounded-lg border border-slate-200 bg-white p-5 shadow-sm lg:grid-cols-[0.9fr_1.1fr] lg:p-8">
