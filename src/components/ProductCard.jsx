@@ -4,9 +4,9 @@ import { formatCurrency } from '../utils/formatCurrency.js';
 
 export default function ProductCard({ product }) {
   return (
-    <article className="flex h-[500px] flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
+    <article className="flex h-[500px] flex-col overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-soft dark:border-slate-800 dark:bg-slate-900">
       <Link to={`/products/${product.id}`} className="flex h-full flex-col">
-        <div className="flex h-72 shrink-0 items-center justify-center bg-white p-6 sm:h-80">
+        <div className="flex h-72 shrink-0 items-center justify-center bg-white p-6 transition-colors dark:bg-slate-950 sm:h-80">
           <img
             src={product.image}
             alt={product.title}
@@ -15,7 +15,7 @@ export default function ProductCard({ product }) {
           />
         </div>
 
-        <div className="flex min-h-0 flex-1 flex-col gap-4 border-t border-slate-100 p-5">
+        <div className="flex min-h-0 flex-1 flex-col gap-4 border-t border-slate-100 p-5 dark:border-slate-800">
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-emerald-700">
               {product.category}

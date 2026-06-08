@@ -3,9 +3,11 @@ import ProductCard from './ProductCard.jsx';
 export default function ProductGrid({ products }) {
   if (products.length === 0) {
     return (
-      <div className="rounded-lg border border-dashed border-slate-300 bg-white p-10 text-center">
+      <div className="rounded-lg border border-dashed border-slate-300 bg-white p-10 text-center dark:border-slate-700 dark:bg-slate-900">
         <p className="font-semibold">Produk tidak ditemukan.</p>
-        <p className="mt-2 text-sm text-slate-600">Coba ubah kata kunci atau kategori filter.</p>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+          Coba ubah kata kunci atau kategori filter.
+        </p>
       </div>
     );
   }
