@@ -14,7 +14,7 @@ export default function ProductDetailPage() {
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
       <Link
         to="/"
-        className="mb-6 inline-flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-white hover:text-slate-950 dark:text-slate-300 dark:hover:bg-slate-900 dark:hover:text-white"
+        className="mb-6 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/60 px-4 py-2 text-sm font-bold text-slate-700 transition hover:-translate-x-1 hover:bg-white dark:border-white/10 dark:bg-white/10 dark:text-slate-300 dark:hover:bg-white/15 dark:hover:text-white"
       >
         <ArrowLeft size={17} aria-hidden="true" />
         Kembali ke produk
@@ -25,29 +25,33 @@ export default function ProductDetailPage() {
       {!loading && detailError ? <ErrorState message={detailError} onRetry={refetchProducts} /> : null}
 
       {!loading && !detailError && product ? (
-        <section className="grid gap-8 rounded-lg border border-slate-200 bg-white p-5 shadow-sm transition-colors dark:border-slate-800 dark:bg-slate-900 lg:grid-cols-[0.9fr_1.1fr] lg:p-8">
-          <div className="flex h-[28rem] items-center justify-center rounded-lg bg-slate-50 p-8 transition-colors dark:bg-slate-950">
+        <section className="grid gap-8 border-y border-black/15 py-6 transition-colors dark:border-white/15 lg:grid-cols-[0.9fr_1.1fr] lg:py-10">
+          <div className="flex h-[32rem] items-center justify-center rounded-lg bg-[#ece7dc] p-8 transition-colors dark:bg-slate-950">
             <img src={product.image} alt={product.title} className="h-full w-full object-contain" />
           </div>
 
           <div className="flex flex-col justify-center">
-            <p className="text-sm font-semibold uppercase tracking-wide text-emerald-700">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-emerald-700 dark:text-emerald-300">
               {product.category}
             </p>
-            <h1 className="mt-3 text-3xl font-bold leading-tight sm:text-4xl">{product.title}</h1>
+            <h1 className="mt-4 text-5xl font-black leading-none tracking-tight sm:text-6xl">
+              {product.title}
+            </h1>
 
             <div className="mt-5 flex flex-wrap items-center gap-3">
-              <p className="text-3xl font-bold">{formatCurrency(product.price)}</p>
-              <span className="inline-flex items-center gap-1 rounded-md bg-amber-50 px-3 py-2 text-sm font-semibold text-amber-700">
+              <p className="text-3xl font-black">{formatCurrency(product.price)}</p>
+              <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-3 py-2 text-sm font-bold text-amber-800">
                 <Star size={16} fill="currentColor" aria-hidden="true" />
                 {product.rating?.rate ?? '-'} / 5
               </span>
-              <span className="rounded-md bg-slate-100 px-3 py-2 text-sm font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+              <span className="rounded-full bg-white/70 px-3 py-2 text-sm font-bold text-slate-600 dark:bg-white/10 dark:text-slate-300">
                 {product.rating?.count ?? 0} reviews
               </span>
             </div>
 
-            <p className="mt-6 leading-8 text-slate-600 dark:text-slate-300">{product.description}</p>
+            <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-700 dark:text-slate-300">
+              {product.description}
+            </p>
           </div>
         </section>
       ) : null}
