@@ -1,19 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './App.jsx';
 import { ProductProvider } from './contexts/ProductContext.jsx';
 import { ThemeProvider } from './contexts/ThemeContext.jsx';
 import './styles.css';
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <ProductProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ProductProvider>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <ProductProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ProductProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
 );
+

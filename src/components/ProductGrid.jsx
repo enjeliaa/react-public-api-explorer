@@ -13,7 +13,7 @@ export default function ProductGrid({ products }) {
   }
 
   return (
-    <section className="grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <section className="grid auto-rows-fr gap-5 pb-10 sm:grid-cols-2 lg:grid-cols-3">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
